@@ -1,5 +1,5 @@
 # Resource types
-|NAME|SHORTNAMES|APIVERSION|NAMESPACED|KIND|
+|NAME|SHORTNAMES|NOTES|NAMESPACED|KIND|
 | --- | ---- | ---- | --- | --- |
 |bindings||v1|true|Binding|
 |componentstatuses|cs|v1|false|ComponentStatus|
