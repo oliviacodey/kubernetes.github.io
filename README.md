@@ -44,9 +44,20 @@ data:
 
 
 # argocd
+```bash
 kubectl create namespace argocd
 kubectl apply -n argocd -f https://raw.githubusercontent.com/argoproj/argo-cd/stable/manifests/install.yaml
 kubectl patch svc argocd-server -n argocd -p '{"spec": {"type": "LoadBalancer"}}'
+```
+```bash
+kubectl -n argocd exec -it pod/argocd-server-7cbbdb87d7-tj85z /bin/sh
+```
+```bash
+argocd admin initial-password
+```
+http://argocd-ip <admin><initial-password>
+
+kubectl config get-contexts -o name
 
 
 # kubectl
@@ -62,13 +73,14 @@ kubectl patch svc argocd-server -n argocd -p '{"spec": {"type": "LoadBalancer"}}
 * kubectl apply -f FILENAME [flags]
 - Apply a configuration change to a resource from a file or stdin
 
-## apply
-* kubectl apply -f FILENAME [flags]
-- Apply a configuration change to a resource from a file or stdin
-
 ## completion
 * kubectl completion SHELL [options]
 - Output shell completion code for the specified shell (bash or zsh).
+
+### Change default namespace
+```bash
+kubectl config set-context --current --namespace=argocd
+```
 
 ## annotate
 * Add or update the annotations of one or more resources
