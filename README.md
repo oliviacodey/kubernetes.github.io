@@ -1,21 +1,33 @@
 # Install
 # k3s
+```bash
 curl -sfL https://get.k3s.io | sh -
-
+```
+```yaml
 [kubernetes]
 name=Kubernetes
 baseurl=https://pkgs.k8s.io/core:/stable:/v1.30/rpm/
 enabled=1
 gpgcheck=1
 gpgkey=https://pkgs.k8s.io/core:/stable:/v1.30/rpm/repodata/repomd.xml.key
-
+```
+```bash
 dnf install kubectl -y
 export KUBECONFIG=/etc/rancher/k3s/k3s.yaml
 kubectl get pods
-
+```
 # MetalLB
+```yaml
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: metallb-system
+  labels:
+    app: metallb
+```
+```bash
 kubectl apply -f https://raw.githubusercontent.com/metallb/metallb/v0.14.5/config/manifests/metallb-native.yaml
-
+```
 ---
 apiVersion: v1
 kind: ConfigMap
