@@ -1,5 +1,12 @@
 # kubectl
 
+* kubectl get pods -o=wide -n=<namespace_name>
+* kubectl logs -l name=<label name>
+* kubectl config get-contexts
+* kubectl config use-context <cluster name>
+* kubectl logs --since=6h
+* kubectl exec -it <pod_name> /bin/sh
+
 ## apply
 * kubectl apply -f FILENAME [flags]
 - Apply a configuration change to a resource from a file or stdin
