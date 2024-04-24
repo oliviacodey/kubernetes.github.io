@@ -1,6 +1,6 @@
 # Resource types
 |NAME|SHORTNAMES|APIVERSION|NAMESPACED|KIND|
-| --- | :----: | ----: | --- | --- |
+| --- | ---- | ---- | --- | --- |
 |bindings||v1|true|Binding|
 |componentstatuses|cs|v1|false|ComponentStatus|
 |configmaps|cm|v1|true|ConfigMap|
