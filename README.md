@@ -1,18 +1,18 @@
-#kubectl
+# kubectl
 
-##apply
+## apply
 * kubectl apply -f FILENAME [flags]
 - Apply a configuration change to a resource from a file or stdin
 
-##apply
+## apply
 * kubectl apply -f FILENAME [flags]
 - Apply a configuration change to a resource from a file or stdin
 
-##completion
+## completion
 * kubectl completion SHELL [options]
 - Output shell completion code for the specified shell (bash or zsh).
 
-annotate
+## annotate
 * Add or update the annotations of one or more resources
 - kubectl annotate (-f FILENAME | TYPE NAME | TYPE/NAME) KEY_1=VAL_1 ... KEY_N=VAL_N [--overwrite] [--all] [--resource-version=version] [flags]
 You can use either labels or annotations to attach metadata to Kubernetes objects. Labels can be used to select objects and to find collections of objects that satisfy certain conditions. In contrast, annotations are not used to identify and select objects. The metadata in an annotation can be small or large, structured or unstructured, and can include characters not permitted by labels. It is possible to use labels as well as annotations in the metadata of the same object.
