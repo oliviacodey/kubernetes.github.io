@@ -3,6 +3,8 @@
 ```bash
 curl -sfL https://get.k3s.io | sh -
 ```
+### Om kubectl behövs installeras
+skapa repo-fil
 ```yaml
 [kubernetes]
 name=Kubernetes
@@ -11,10 +13,16 @@ enabled=1
 gpgcheck=1
 gpgkey=https://pkgs.k8s.io/core:/stable:/v1.30/rpm/repodata/repomd.xml.key
 ```
+installera kubectl och anslut till klustret
 ```bash
 dnf install kubectl -y
 export KUBECONFIG=/etc/rancher/k3s/k3s.yaml
 kubectl get pods
+```
+aktivera auto-complete
+```bash
+dnf install bash-completion
+kubectl completion bash | sudo tee /etc/bash_completion.d/kubectl > /dev/null
 ```
 # MetalLB
 ```yaml
