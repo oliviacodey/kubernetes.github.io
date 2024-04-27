@@ -1,10 +1,15 @@
-# Install
-# k3s
+# Install Kubernetes
+
+## k3s
+
 ```bash
 curl -sfL https://get.k3s.io | sh -
 ```
+
 ### Om kubectl behövs installeras
+
 skapa repo-fil
+
 ```yaml
 [kubernetes]
 name=Kubernetes
@@ -13,18 +18,24 @@ enabled=1
 gpgcheck=1
 gpgkey=https://pkgs.k8s.io/core:/stable:/v1.30/rpm/repodata/repomd.xml.key
 ```
+
 installera kubectl och anslut till klustret
+
 ```bash
 dnf install kubectl -y
 export KUBECONFIG=/etc/rancher/k3s/k3s.yaml
 kubectl get pods
 ```
+
 aktivera auto-complete
+
 ```bash
 dnf install bash-completion
 kubectl completion bash | sudo tee /etc/bash_completion.d/kubectl > /dev/null
 ```
-# MetalLB
+
+## MetalLB
+
 ```yaml
 apiVersion: v1
 kind: Namespace
@@ -33,9 +44,11 @@ metadata:
   labels:
     app: metallb
 ```
+
 ```bash
 kubectl apply -f https://raw.githubusercontent.com/metallb/metallb/v0.14.5/config/manifests/metallb-native.yaml
 ```
+
 ---
 apiVersion: v1
 kind: ConfigMap
@@ -51,18 +64,22 @@ data:
       - 192.168.148.20 - 192.168.148.25
 
 
-# argocd
+## argocd
+
 ```bash
 kubectl create namespace argocd
 kubectl apply -n argocd -f https://raw.githubusercontent.com/argoproj/argo-cd/stable/manifests/install.yaml
 kubectl patch svc argocd-server -n argocd -p '{"spec": {"type": "LoadBalancer"}}'
 ```
+
 ```bash
 kubectl -n argocd exec -it pod/argocd-server-7cbbdb87d7-tj85z /bin/sh
 ```
+
 ```bash
 argocd admin initial-password
 ```
+
 http://argocd-ip <admin><initial-password>
 
 kubectl config get-contexts -o name
