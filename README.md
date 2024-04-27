@@ -1,6 +1,6 @@
 # Install Kubernetes
 
-## k3s
+### k3s
 
 ```bash
 curl -sfL https://get.k3s.io | sh -
@@ -49,6 +49,7 @@ metadata:
 kubectl apply -f https://raw.githubusercontent.com/metallb/metallb/v0.14.5/config/manifests/metallb-native.yaml
 ```
 
+```yaml
 ---
 apiVersion: v1
 kind: ConfigMap
@@ -62,7 +63,7 @@ data:
       protocol: layer2
       addresses:
       - 192.168.148.20 - 192.168.148.25
-
+```
 
 ## argocd
 
@@ -74,18 +75,14 @@ kubectl patch svc argocd-server -n argocd -p '{"spec": {"type": "LoadBalancer"}}
 
 ```bash
 kubectl -n argocd exec -it pod/argocd-server-7cbbdb87d7-tj85z /bin/sh
-```
-
-```bash
 argocd admin initial-password
 ```
 
-http://argocd-ip <admin><initial-password>
+http://argocd-ip admin:initial-password
 
 kubectl config get-contexts -o name
 
-
-# kubectl
+## kubectl
 
 * kubectl get pods -o=wide -n=<namespace_name>
 * kubectl logs -l name=<label name>
