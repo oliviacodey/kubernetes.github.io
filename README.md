@@ -84,6 +84,8 @@ kubectl config get-contexts -o name
 
 ## kubectl
 
+* kubectl -w (wait)
+* kubectl port-forward service serviceName 8443:443
 * kubectl get pods -o=wide -n=<namespace_name>
 * kubectl logs -l name=<label name>
 * kubectl config get-contexts
