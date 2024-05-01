@@ -5,6 +5,11 @@
 ```bash
 curl -sfL https://get.k3s.io | sh -
 ```
+### NFS
+
+```bash
+dnf install -y nfs-utils
+```
 
 ### Om kubectl behövs installeras
 
