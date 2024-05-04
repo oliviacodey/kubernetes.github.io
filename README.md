@@ -1,4 +1,6 @@
-## Installera Kubernetes
+# Kubernetes
+
+## Get started
 
 ### k3s
 
@@ -94,7 +96,8 @@ kubectl patch svc argocd-server -n argocd -p '{"spec": {"type": "LoadBalancer"}}
 kubectl -n argocd exec -it pod/argocd-server-7cbbdb87d7-tj85z -- argocd admin initial-password
 ```
 
-http://argocd-ip admin:initial-password
+<http://argocd-ip>
+admin:initial-password
 
 kubectl config get-contexts -o name
 
@@ -128,21 +131,22 @@ kubectl rollout restart deployment/nginx
 * kubectl -w (wait)
 * kubectl port-forward service serviceName 8443:443
 * kubectl get pods -o=wide -n=<namespace_name>
-* kubectl logs -l name=<label name>
+* kubectl logs -l name="label name"
 * kubectl config get-contexts
-* kubectl config use-context <cluster name>
+* kubectl config use-context "cluster name"
 * kubectl logs --since=6h
 * kubectl exec -it <pod_name> /bin/sh
 
 ## apply
-* kubectl apply -f FILENAME [flags]
-- Apply a configuration change to a resource from a file or stdin
 
-## completion
-* kubectl completion SHELL [options]
-- Output shell completion code for the specified shell (bash or zsh).
+Apply a configuration change to a resource from a file or stdin
+
+```bash
+kubectl apply -f FILENAME [flags]
+```
 
 ### Change default namespace
+
 ```bash
 kubectl config set-context --current --namespace=argocd
 ```
