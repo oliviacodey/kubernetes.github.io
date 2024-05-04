@@ -1,14 +1,9 @@
-# Install Kubernetes
+## Installera Kubernetes
 
 ### k3s
 
 ```bash
 curl -sfL https://get.k3s.io | sh -
-```
-### NFS
-
-```bash
-dnf install -y nfs-utils
 ```
 
 ### Om kubectl behövs installeras
@@ -70,6 +65,23 @@ data:
       - 192.168.148.20 - 192.168.148.25
 ```
 
+## Helm
+
+```bash
+curl https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3 | bash
+helm repo add bitnami https://charts.bitnami.com/bitnami
+```
+
+## NFS StorageClass
+
+```bash
+helm repo add nfs-subdir-external-provisioner https://kubernetes-sigs.github.io/nfs-subdir-external-provisioner/
+
+helm install nfs-subdir-external-provisioner nfs-subdir-external-provisioner/nfs-subdir-external-provisioner \
+    --set nfs.server=x.x.x.x \
+    --set nfs.path=/exported/path
+```
+
 ## argocd
 
 ```bash
@@ -79,13 +91,37 @@ kubectl patch svc argocd-server -n argocd -p '{"spec": {"type": "LoadBalancer"}}
 ```
 
 ```bash
-kubectl -n argocd exec -it pod/argocd-server-7cbbdb87d7-tj85z /bin/sh
-argocd admin initial-password
+kubectl -n argocd exec -it pod/argocd-server-7cbbdb87d7-tj85z -- argocd admin initial-password
 ```
 
 http://argocd-ip admin:initial-password
 
 kubectl config get-contexts -o name
+
+## ConfigMaps
+
+### Skapa en configmap från fil
+
+kubectl create configmap mediawiki --from-file /home/micke/LocalSettings.php
+
+### Mounta en configmap i en pod
+
+```yaml
+  volumeMounts:
+    - name: config-volume
+      mountPath: /var/www/html/LocalSettings.php
+      subPath: LocalSettings.php #värdet i configmapen
+volumes:
+- name: config-volume
+  configMap:
+    name: mediawiki
+```
+
+### Restart deployment
+
+```bash
+kubectl rollout restart deployment/nginx
+```
 
 ## kubectl
 
